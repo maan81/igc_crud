@@ -25,10 +25,37 @@ igc$ php ./composer.phar create-project --prefer-dist laravel/laravel crud
 # took about an hour
 ------------------------------------------------
 
+igs$ git init
+igs$ git add .
+igs$ git commit 'init'
+
+------------------------------------------------
+
 create database named crud using phpmyadmin
 
 ------------------------------------------------
 
 adjusted .env file for database username/password/database
+
+------------------------------------------------
+
+cd crud
+php artisan make:migration create_categories_table
+
+------------------------------------------------
+
+edited `database/migration/...create_categories_table.php` to add categoies table attributes
+
+php artisan migrate
+
+------------------------------------------------
+
+php artisan make:migration create_news_table
+
+------------------------------------------------
+
+edited `database/migration/...create_news_table.php` to add categoies table attributes
+
+php artisan migrate
 
 ------------------------------------------------
