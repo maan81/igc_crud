@@ -59,3 +59,8 @@ edited `database/migration/...create_news_table.php` to add categoies table attr
 php artisan migrate
 
 ------------------------------------------------
+
+php artisan make:seeder CategoriesTableSeeder
+php artisan migrate:refresh --seed  <<<<<<<<<<<-----------not working ???
+
+------------------------------------------------
