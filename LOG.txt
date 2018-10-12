@@ -65,4 +65,6 @@ php artisan migrate:refresh --seed  <<<<<<<<<<<-----------not working ???
 
 ------------------------------------------------
 
+php artisan  make:model -cr Categories
+
 categories dummy model, view, controller
