@@ -64,3 +64,5 @@ php artisan make:seeder CategoriesTableSeeder
 php artisan migrate:refresh --seed  <<<<<<<<<<<-----------not working ???
 
 ------------------------------------------------
+
+categories dummy model, view, controller
