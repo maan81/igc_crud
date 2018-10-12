@@ -1,0 +1,34 @@
+LOG
+
+------------------------------------------------
+
+make directory for the project, and go to the directory
+
+$ mkdir igc 
+$ cd igc
+
+------------------------------------------------
+
+download & install composer
+
+igc$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+igc$ php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+igc$ php composer-setup.php
+igc$ php -r "unlink('composer-setup.php');"
+
+------------------------------------------------
+
+download & install laravel, named as crud
+
+igc$ php ./composer.phar create-project --prefer-dist laravel/laravel crud
+
+# took about an hour
+------------------------------------------------
+
+create database named crud using phpmyadmin
+
+------------------------------------------------
+
+adjusted .env file for database username/password/database
+
+------------------------------------------------
