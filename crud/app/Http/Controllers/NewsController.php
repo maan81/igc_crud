@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\Categories;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -26,7 +27,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::all();
+
+        return view('news.create',['categories'=>$categories]);
     }
 
     /**
