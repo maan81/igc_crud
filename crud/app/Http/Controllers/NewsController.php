@@ -78,9 +78,11 @@ class NewsController extends Controller
      * @param  \App\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show($id)
     {
-        //
+        $categories = Categories::all();
+
+        return view('news.show', ['news' => News::findOrFail($id), 'categories' => $categories ]);
     }
 
     /**
