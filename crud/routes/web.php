@@ -18,4 +18,6 @@ Route::get('/', function () {
 
 Route::resource('/categories', 'CategoriesController');
 
+Route::get('/news/add', 'NewsController@create');
 Route::resource('/news', 'NewsController');
+

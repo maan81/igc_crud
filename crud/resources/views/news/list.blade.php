@@ -51,6 +51,8 @@
     <div class="row">
         <div class="col-md-9">
 
+            <a href="/news/add" class="btn btn-default float-right">Add</a>
+
             <table class="table">
                 <thead>
                     <tr>
