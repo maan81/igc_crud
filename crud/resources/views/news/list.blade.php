@@ -73,20 +73,33 @@
                         <th scope="col">Category</th>
                         <th scope="col">Publish At</th>
                         <th scope="col">Created At</th>
-                        <th scope="col">Updated At</th>
+                        <th scope="col">#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($news as $each){ ?>
+                    @foreach($news as $each)
                         <tr>
                             <th scope="row"><?=$each->id?></th>
-                            <td><?=$each->title?></td>
+                            <td>
+                                <a href="<?=URL::action('NewsController@show',['id' => $each->id])?>">
+                                    <?=$each->title?>
+                                </a>
+                            </td>
                             <td><?=$each->author?></td>
                             <td><?=$each->Publish_date?></td>
                             <td><?=$each->created_at?></td>
                             <td><?=$each->updated_at?></td>
+                            <td>
+                                <a href="<?=URL::action('NewsController@show',['id' => $each->id])?>">
+                                    Edit
+                                </a>
+
+                                {!! Form::open(['method' => 'Delete', 'route' => ['news.destroy', $each->id]]) !!}
+                                    <button type="submit" class="btn btn-link">Delete</button>
+                                {!! Form::close() !!}
+                            </td>
                         </tr>
-                    <?php } ?>
+                    @endforeach
                 </tbody>
             </table>
 

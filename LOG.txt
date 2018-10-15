@@ -72,3 +72,18 @@ categories dummy model, view, controller
 ------------------------------------------------
 
 php artisan  make:model -cr News
+
+------------------------------------------------
+
+in composer.json :
+
+require{
+    ....
+    "laravelcollective/html": "~5.7"
+    ....
+}
+
+and
+
+php composer update
+------------------------------------------------
