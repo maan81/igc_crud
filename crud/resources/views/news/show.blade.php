@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" class="form-control-file" name="image" id="image" value="<?=$news->id?>">
+                    <img src="<?=$urlPath?>thumbs/<?=$filename?>">
                 </div>
 
                 <div class="form-group">

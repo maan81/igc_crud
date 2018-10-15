@@ -11,6 +11,17 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class NewsController extends Controller
 {
+
+    // path( folder) to save images and thumbnails
+    protected $destinationPath;
+    protected $urlPath;
+
+    public function __construct()
+    {
+        $this->destinationPath = base_path('public/uploads/');
+        $this->urlPath = '/uploads/';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +54,6 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $destinationPath = base_path('public/uploads/');
-
-
         $this->validate($request, [
             'title' => 'required',
             'author' => 'required'
@@ -71,11 +79,11 @@ class NewsController extends Controller
 
             $filename = $news->id.'.'.Input::file('image')->getClientOriginalExtension();
 
-            Input::file('image')->move($destinationPath, $filename);
+            Input::file('image')->move($this->destinationPath, $filename);
 
-            \File::copy($destinationPath.$filename, $destinationPath.'thumbs/'.$filename);
+            \File::copy($this->destinationPath.$filename, $this->destinationPath.'thumbs/'.$filename);
 
-            Image::make($destinationPath.'thumbs/'.$filename)->resize(100,100)->save($destinationPath.'thumbs/'.$filename);
+            Image::make($this->destinationPath.'thumbs/'.$filename)->resize(100,100)->save($this->destinationPath.'thumbs/'.$filename);
         }
 
         return redirect('/news/'.$news->id);
@@ -91,7 +99,12 @@ class NewsController extends Controller
     {
         $categories = Categories::all();
 
-        return view('news.show', ['news' => News::findOrFail($id), 'categories' => $categories ]);
+        return view('news.show', [
+            'news' => News::findOrFail($id),
+            'categories' => $categories,
+            'urlPath' => $this->urlPath,
+            'filename' => $id.'.jpg', // <<------- !!!!!!!!! image type fixed to jpg !!!!!!!!!!!
+        ]);
     }
 
     /**
