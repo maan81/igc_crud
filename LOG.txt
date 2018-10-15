@@ -87,3 +87,10 @@ and
 
 php composer update
 ------------------------------------------------
+
+to use image resizing :
+
+composer require intervention/image
+composer dump-autoload
+
+php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"

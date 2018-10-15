@@ -7,6 +7,8 @@ use App\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class NewsController extends Controller
 {
     /**
@@ -41,7 +43,8 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $destinationPath = base_path('/public/uploads/');
+        $destinationPath = base_path('public/uploads/');
+
 
         $this->validate($request, [
             'title' => 'required',
@@ -65,11 +68,17 @@ class NewsController extends Controller
 
         if (Input::hasFile('image'))
         {
-            $fileName = Input::file('image')->getClientOriginalName();
-            Input::file('image')->move($destinationPath, $news->id);
+
+            $filename = $news->id.'.'.Input::file('image')->getClientOriginalExtension();
+
+            Input::file('image')->move($destinationPath, $filename);
+
+            \File::copy($destinationPath.$filename, $destinationPath.'thumbs/'.$filename);
+
+            Image::make($destinationPath.'thumbs/'.$filename)->resize(100,100)->save($destinationPath.'thumbs/'.$filename);
         }
 
-        return redirect()->route('/news', 'NewsController@index');
+        return redirect('/news/'.$news->id);
     }
 
     /**
