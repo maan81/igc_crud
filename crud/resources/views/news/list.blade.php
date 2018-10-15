@@ -95,7 +95,9 @@
                                 </a>
 
                                 {!! Form::open(['method' => 'Delete', 'route' => ['news.destroy', $each->id]]) !!}
-                                    <button type="submit" class="btn btn-link">Delete</button>
+                                    <button type="submit" class="btn btn-link"
+                                        onclick="return confirm('Are you sure you want to delete <?=$each->title?> ?')"
+                                    >Delete</button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

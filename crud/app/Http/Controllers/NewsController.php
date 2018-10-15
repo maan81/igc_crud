@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::where('deleted_at',null)->get();
 
         return view('news.list',['news'=>$news]);
     }
@@ -116,6 +116,9 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        $news->deleted_at = now();
+        $news->save();
+
+        return redirect('news');
     }
 }
