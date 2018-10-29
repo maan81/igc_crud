@@ -115,7 +115,14 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        $categories = Categories::all();
+
+        return view('news.edit', [
+            'news' => $news,
+            'categories' => $categories,
+            'urlPath' => $this->urlPath,
+            'filename' => $news->id.'.jpg', // <<------- !!!!!!!!! image type fixed to jpg !!!!!!!!!!!
+        ]);
     }
 
     /**
@@ -127,7 +134,25 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        $newsId = $request->input('newsId');;
+
+        $news = News::find($newsId);
+
+        $news->title    = $request->input('title');
+        $news->author   = $request->input('author');
+        $news->content  = $request->input('newsDescription');;
+        $news->Published_date = $request->input('publishedDate');;
+        $news->category_id = $request->input('categoryId');
+
+        $news->updated_at = now();
+
+        // Highlights      varchar(200)    utf8mb4_unicode_ci      No  None            Change Change   Drop Drop
+        // category_name   varchar(50)     utf8mb4_unicode_ci      No  None            Change Change   Drop Drop
+
+        $news->save();
+
+
+        return redirect('/news/'.$request->input('newsId'));
     }
 
     /**

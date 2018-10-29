@@ -90,7 +90,7 @@
                             <td><?=$each->created_at?></td>
                             <td><?=$each->updated_at?></td>
                             <td>
-                                <a href="<?=URL::action('NewsController@show',['id' => $each->id])?>">
+                                <a href="<?=URL::action('NewsController@edit',['id' => $each->id])?>">
                                     Edit
                                 </a>
 
