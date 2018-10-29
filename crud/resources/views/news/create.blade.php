@@ -21,7 +21,34 @@
             margin-top: 15px;
             position: absolute;
         }
+        #image-preview{
+            display: none;
+            width: 250px;
+        }
     </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image-preview')
+                        .attr('src', e.target.result)
+                        .show();
+                    ;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(function(){
+            $("#image").change(function() {
+                readURL(this);
+            });
+        });
+
+
+    </script>
 </head>
 <body>
 
@@ -63,6 +90,7 @@
                 <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" class="form-control-file" name="image" id="image">
+                    <img id="image-preview" src="" style="display: none;">
                 </div>
 
                 <div class="form-group">
