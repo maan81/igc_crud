@@ -81,11 +81,11 @@
     </div>
 
 
-    <div class="row">
-        <form method="post" action="{{url('news/'.$news->id.'/update')}}" enctype="multipart/form-data">
-        <div class="col-md-9 content">
+    <form method="post" action="{{url('news/'.$news->id.'/update')}}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-9 content">
 
-            <div style="padding: 10px 0;">Add News Form</div>
+                <div style="padding: 10px 0;">Add News Form</div>
 
                 @csrf
                 <div class="form-group">
@@ -120,33 +120,33 @@
 
                 <input type="hidden" name="categoryId" id="categoryId" value="<?=$news->category_id?>">
                 <input type="hidden" name="newsId" id="newsId" value="<?=$news->id?>">
-        </div>
-        <div class="col-md-3 content">
-            <div class="row"></div>
-            <div class="row">
+            </div>
+            <div class="col-md-3 content">
+                <div class="row"></div>
+                <div class="row">
 
-                <h3 class="col-md-12">Categories</h3>
+                    <h3 class="col-md-12">Categories</h3>
 
-                <ul style="list-style: none; padding: 0;">
-                    <?php foreach($categories as $category){?>
-                        <li class="col-md-12">
-                            <input type="checkbox" name="categoryId[]" value="<?=$category->id?>"
-                                <?php
-                                    foreach($news->categories as $categoryEach){
-                                        if($categoryEach->id==$category->id){
-                                            echo 'checked="checked"';
-                                            break;
+                    <ul style="list-style: none; padding: 0;">
+                        <?php foreach($categories as $category){?>
+                            <li class="col-md-12">
+                                <input type="checkbox" name="categoryId[]" value="<?=$category->id?>"
+                                    <?php
+                                        foreach($news->categories as $categoryEach){
+                                            if($categoryEach->id==$category->id){
+                                                echo 'checked="checked"';
+                                                break;
+                                            }
                                         }
-                                    }
-                                ?>
-                            >
-                            <?=$category->Display_name?>
-                        </li>
-                    <?php } ?>
-                </ul>
+                                    ?>
+                                >
+                                <?=$category->Display_name?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </form>
 
 </div>

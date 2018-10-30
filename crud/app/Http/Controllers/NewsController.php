@@ -65,7 +65,6 @@ class NewsController extends Controller
         $news->author = $request->input('author');
         $news->content = $request->input('newsDescription');;
         $news->Published_date = $request->input('publishedDate');;
-        $news->category_id = $request->input('categoryId');
 
         $news->created_at = now();
 
@@ -73,6 +72,15 @@ class NewsController extends Controller
         // category_name   varchar(50)     utf8mb4_unicode_ci      No  None            Change Change   Drop Drop
 
         $news->save();
+
+
+        $selectedCategories = [];
+        foreach ($request->input('categoryId') as $newsCategories) {
+            $selectedCategories[] = $newsCategories;
+        }
+
+        $news->categories()->sync($selectedCategories);
+
 
         if (Input::hasFile('image'))
         {
@@ -156,8 +164,8 @@ class NewsController extends Controller
         $news->author   = $request->input('author');
         $news->content  = $request->input('newsDescription');;
         $news->Published_date = $request->input('publishedDate');;
-
         $news->updated_at = now();
+
 
         // Highlights      varchar(200)    utf8mb4_unicode_ci      No  None            Change Change   Drop Drop
         // category_name   varchar(50)     utf8mb4_unicode_ci      No  None            Change Change   Drop Drop

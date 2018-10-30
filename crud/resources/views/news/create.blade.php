@@ -78,12 +78,12 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-md-9 content">
+    <form method="post" action="{{route('news.store')}}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-9 content">
 
-            <div style="padding: 10px 0;">Add News Form</div>
+                <div style="padding: 10px 0;">Add News Form</div>
 
-            <form method="post" action="{{route('news.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -113,27 +113,27 @@
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <input type="hidden" name="categoryId" id="categoryId">
-            </form>
-        </div>
-        <div class="col-md-3 content">
-            <div class="row"></div>
-            <div class="row">
+            </div>
+            <div class="col-md-3 content">
+                <div class="row"></div>
+                <div class="row">
 
-                <h3 class="col-md-12">Categories</h3>
+                    <h3 class="col-md-12">Categories</h3>
 
-                <ul style="list-style: none; padding: 0;">
-                    <?php foreach($categories as $category){?>
-                        <li class="col-md-12">
-                            <input type="radio" name="categories" value="<?=$category->id?>"
-                                onClick="document.getElementById('categoryId').value=this.value"
-                            >
-                            <?=$category->Display_name?>
-                        </li>
-                    <?php } ?>
-                </ul>
+                    <ul style="list-style: none; padding: 0;">
+                        <?php foreach($categories as $category){?>
+                            <li class="col-md-12">
+                                <input type="checkbox" name="categories" value="<?=$category->id?>"
+                                    onClick="document.getElementById('categoryId').value=this.value"
+                                >
+                                <?=$category->Display_name?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
 </div>
 

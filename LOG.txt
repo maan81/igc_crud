@@ -94,3 +94,11 @@ composer require intervention/image
 composer dump-autoload
 
 php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
+
+------------------------------------------------
+
+creating table for many to many relationship
+
+php artisan make:migration create_categories_news_table
+php artisan migrate
+------------------------------------------------
