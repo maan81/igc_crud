@@ -151,6 +151,17 @@ class NewsController extends Controller
 
         $news->save();
 
+        if (Input::hasFile('image'))
+        {
+
+            $filename = $news->id.'.'.Input::file('image')->getClientOriginalExtension();
+
+            Input::file('image')->move($this->destinationPath, $filename);
+
+            \File::copy($this->destinationPath.$filename, $this->destinationPath.'thumbs/'.$filename);
+
+            Image::make($this->destinationPath.'thumbs/'.$filename)->resize(100,100)->save($this->destinationPath.'thumbs/'.$filename);
+        }
 
         return redirect('/news/'.$request->input('newsId'));
     }

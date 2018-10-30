@@ -21,7 +21,37 @@
             margin-top: 15px;
             position: absolute;
         }
+        #image-preview{
+            /*display: none;*/
+            width: 250px;
+        }
     </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    console.log(e.target.result)
+                    $('#image-preview')
+                        .attr('src', e.target.result)
+                        .show();
+                    ;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(function(){
+            $("#image").change(function() {
+                readURL(this);
+            });
+
+            $(document).on('click','#change_image',function(){
+                $('#image').trigger('click');
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -62,8 +92,9 @@
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <img src="<?=$urlPath?>thumbs/<?=$filename?>">
-                    <button type="button" class="btn btn-default">Change</button>
+                    <img id="image-preview" src="<?=$urlPath?>thumbs/<?=$filename?>">
+                    <button id="change_image" type="button" class="btn btn-default">Change</button>
+                    <input id="image" type="file" name="image" style="display: none">
                 </div>
 
                 <div class="form-group">
