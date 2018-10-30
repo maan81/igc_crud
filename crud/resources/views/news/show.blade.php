@@ -91,7 +91,7 @@
                     <button type="edit" class="btn btn-primary">Edit</button>
                 </form>
                 <button type="delete" class="btn btn-primary">Delete</button>
-                <button type="" class="btn btn-default">Back</button>
+                <a href="/news" class="btn btn-default" style="color: #212529;"">Back</a>
             </div>
         </div>
         <div class="col-md-3 content">
