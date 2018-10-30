@@ -21,6 +21,13 @@
             margin-top: 15px;
             position: absolute;
         }
+        button{
+            margin: 0 2px;
+        }
+        #image-preview{
+            /*display: none;*/
+            width: 250px;
+        }
     </style>
 </head>
 <body>
@@ -61,7 +68,7 @@
 
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <img src="<?=$urlPath?>thumbs/<?=$filename?>">
+                    <img id="image-preview" src="<?=$urlPath?>thumbs/<?=$filename?>">
                 </div>
 
                 <div class="form-group">
@@ -79,11 +86,12 @@
                     <div type="text" class="form-control" id="author" name="author" placeholder="author"><?=$news->author?></div>
                 </div>
 
-                <form method="get" action="{{route('news.edit',$news->id)}}">
+                <form class="float-left" method="get" action="{{route('news.edit',$news->id)}}">
                     @csrf
                     <button type="edit" class="btn btn-primary">Edit</button>
                 </form>
                 <button type="delete" class="btn btn-primary">Delete</button>
+                <button type="" class="btn btn-default">Back</button>
             </div>
         </div>
         <div class="col-md-3 content">

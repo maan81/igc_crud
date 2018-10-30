@@ -21,6 +21,9 @@
             margin-top: 15px;
             position: absolute;
         }
+        button{
+            margin: 0 2px;
+        }
         #image-preview{
             /*display: none;*/
             width: 250px;
