@@ -90,7 +90,11 @@
                     @csrf
                     <button type="edit" class="btn btn-primary">Edit</button>
                 </form>
-                <button type="delete" class="btn btn-primary">Delete</button>
+                {!! Form::open(['class' => 'float-left', 'method' => 'Delete', 'route' => ['news.destroy', $news->id]]) !!}
+                    <button type="submit" class="btn btn-warning"
+                        onclick="return confirm('Are you sure you want to delete <?=$news->title?> ?')"
+                    >Delete</button>
+                {!! Form::close() !!}
                 <a href="/news" class="btn btn-default" style="color: #212529;"">Back</a>
             </div>
         </div>
