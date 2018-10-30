@@ -99,8 +99,16 @@ class NewsController extends Controller
     {
         $categories = Categories::all();
 
+        $news = News::findOrFail($id);
+
+        $selectedCategories = [];
+        foreach ($news->categories as $newsCategories) {
+            $selectedCategories[] = $categories[$newsCategories->id];
+        }
+
         return view('news.show', [
             'news' => News::findOrFail($id),
+            'selectedCategories' => $selectedCategories,
             'categories' => $categories,
             'urlPath' => $this->urlPath,
             'filename' => $id.'.jpg', // <<------- !!!!!!!!! image type fixed to jpg !!!!!!!!!!!

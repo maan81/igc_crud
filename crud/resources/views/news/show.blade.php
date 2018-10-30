@@ -107,8 +107,15 @@
                 <ul style="list-style: none; padding: 0;">
                     <?php foreach($categories as $category){?>
                         <li class="col-md-12">
-                            <input type="radio" name="categories" value="<?=$category->id?>"
-                                <?=($news->category_id==$category->id)?'checked="checked"':''?>
+                            <input type="checkbox" name="categories" value="<?=$category->id?>"
+                                <?php
+                                    foreach($news->categories as $categoryEach){
+                                        if($categoryEach->id==$category->id){
+                                            echo 'checked="checked"';
+                                            break;
+                                        }
+                                    }
+                                ?>
                                 onClick="document.getElementById('categoryId').value=this.value"
                                 disabled="disabled"
                             >
