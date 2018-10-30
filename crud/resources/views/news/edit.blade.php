@@ -82,11 +82,11 @@
 
 
     <div class="row">
+        <form method="post" action="{{url('news/'.$news->id.'/update')}}" enctype="multipart/form-data">
         <div class="col-md-9 content">
 
             <div style="padding: 10px 0;">Add News Form</div>
 
-            <form method="post" action="{{url('news/'.$news->id.'/update')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -120,7 +120,6 @@
 
                 <input type="hidden" name="categoryId" id="categoryId" value="<?=$news->category_id?>">
                 <input type="hidden" name="newsId" id="newsId" value="<?=$news->id?>">
-            </form>
         </div>
         <div class="col-md-3 content">
             <div class="row"></div>
@@ -131,9 +130,15 @@
                 <ul style="list-style: none; padding: 0;">
                     <?php foreach($categories as $category){?>
                         <li class="col-md-12">
-                            <input type="checkbox" name="categories" value="<?=$category->id?>"
-                                <?=($news->category_id==$category->id)?'checked="checked"':''?>
-                                onClick="document.getElementById('categoryId').value=this.value"
+                            <input type="checkbox" name="categoryId[]" value="<?=$category->id?>"
+                                <?php
+                                    foreach($news->categories as $categoryEach){
+                                        if($categoryEach->id==$category->id){
+                                            echo 'checked="checked"';
+                                            break;
+                                        }
+                                    }
+                                ?>
                             >
                             <?=$category->Display_name?>
                         </li>
@@ -142,6 +147,7 @@
             </div>
         </div>
     </div>
+    </form>
 
 </div>
 

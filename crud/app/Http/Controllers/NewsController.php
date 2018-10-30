@@ -125,8 +125,14 @@ class NewsController extends Controller
     {
         $categories = Categories::all();
 
+        $selectedCategories = [];
+        foreach ($news->categories as $newsCategories) {
+            $selectedCategories[] = $categories[$newsCategories->id];
+        }
+
         return view('news.edit', [
             'news' => $news,
+            'selectedCategories' => $selectedCategories,
             'categories' => $categories,
             'urlPath' => $this->urlPath,
             'filename' => $news->id.'.jpg', // <<------- !!!!!!!!! image type fixed to jpg !!!!!!!!!!!
@@ -150,7 +156,6 @@ class NewsController extends Controller
         $news->author   = $request->input('author');
         $news->content  = $request->input('newsDescription');;
         $news->Published_date = $request->input('publishedDate');;
-        $news->category_id = $request->input('categoryId');
 
         $news->updated_at = now();
 
@@ -158,6 +163,16 @@ class NewsController extends Controller
         // category_name   varchar(50)     utf8mb4_unicode_ci      No  None            Change Change   Drop Drop
 
         $news->save();
+
+
+
+        $selectedCategories = [];
+        foreach ($request->input('categoryId') as $newsCategories) {
+            $selectedCategories[] = $newsCategories;
+        }
+
+        $news->categories()->sync($selectedCategories);
+
 
         if (Input::hasFile('image'))
         {
